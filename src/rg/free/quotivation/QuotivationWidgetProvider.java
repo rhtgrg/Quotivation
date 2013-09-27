@@ -36,10 +36,13 @@ public class QuotivationWidgetProvider extends AppWidgetProvider {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 		// Obtain widget dimensions
 		Resources res = context.getResources();
-		float width = res.getDimension(R.dimen.widget_width);
-		float height = res.getDimension(R.dimen.widget_height);
-		float padding = res.getDimension(R.dimen.widget_padding);
+		float density = res.getDisplayMetrics().density;
+		float width = res.getDimension(R.dimen.widget_width)/density;
+		float height = res.getDimension(R.dimen.widget_height)/density;
+		float padding = res.getDimension(R.dimen.widget_padding)/density;
 		// Initialize the bitmap manager and the remote view
+		Log.w("wt", ""+width);
+		Log.w("height", ""+height);
 		BitmapManager bman = new BitmapManager(context, width-(padding*2), height); // Padding is taken care of here exclusively
 		RemoteViews views = new RemoteViews(context.getPackageName(),R.layout.quotivation_widget);
 		// Create and set the bitmap for all remote views
