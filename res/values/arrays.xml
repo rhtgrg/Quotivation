@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- List of fonts user can choose from -->
+    <string-array name="font_choices">
+        <item>Aver</item>
+        <item>Aver Italic</item>
+    </string-array>
+    
+    <!-- List of quote sources users can choose from -->
+    <string-array name="quote_sources">
+		<item>The Default Source</item>
+        <item>Text I\'ve Manually Entered</item>
+        <item>An RSS Feed From The Internet</item>
+    </string-array>
+</resources>

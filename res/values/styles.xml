@@ -1,5 +1,4 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -18,11 +17,18 @@
     </style>
     
     <!-- Widget styling TODO: Remove -->
-    <style name="WidgetFont" parent="@android:style/TextAppearance.Medium">
+    <style name="ApplicationComponent" parent="@android:style/TextAppearance.Medium">
 		<item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
-        <item name="android:textColor">#00FF00</item>
-        <item name="android:typeface">monospace</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>    
+    
+    <style name="ApplicationComponent.Form">
+		<item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
     </style>
     
+    <style name="PercentWidthComponent" parent="@android:style/TextAppearance.Medium">
+		<item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style> 
 </resources>

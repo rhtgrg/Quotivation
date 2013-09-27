@@ -24,12 +24,12 @@ public class BitmapManager {
 	int widgetWidth;
 	int color = Color.WHITE;
 	
-	public BitmapManager(Context context){
+	public BitmapManager(Context context, int width, int height){
 		// Set default paint settings
 		this.context = context;
 		initializePaint(Color.WHITE, 60);
-		widgetWidth = convertDiptoPix((float)250);
-		widgetHeight = convertDiptoPix((float)110);
+		widgetWidth = convertDiptoPix((float)width);
+		widgetHeight = convertDiptoPix((float)height);
 	}
 	
 	public void initializePaint(int color, int fontSize){
@@ -43,8 +43,7 @@ public class BitmapManager {
 	}
 	
 	// This is a hack because remote views are weird
-	public Bitmap getFontBitmap(String text) {
-	    Bitmap bitmap = Bitmap.createBitmap(widgetWidth, widgetHeight, Bitmap.Config.ARGB_4444);
+	private Bitmap getFontBitmap(Bitmap bitmap, String text) {
 	    Canvas canvas = new Canvas(bitmap);
 	    // Get an array of lines from the given text
 	    ArrayList<String> lines = wrapText(text);
@@ -55,6 +54,17 @@ public class BitmapManager {
 		    canvas.drawText(lines.get(i), (float)0, fontSize+(offset*i), paint);
 	    }
 	    return bitmap;
+	}
+	
+	public Bitmap getTextOnTransparentBitmap(String text){
+	    Bitmap bitmap = Bitmap.createBitmap(widgetWidth, widgetHeight, Bitmap.Config.ARGB_4444);
+	    return getFontBitmap(bitmap, text);
+	}
+	
+	public Bitmap getTextOnColoredBitmap(String text, int color){
+	    Bitmap bitmap = Bitmap.createBitmap(widgetWidth, widgetHeight, Bitmap.Config.ARGB_4444);
+	    bitmap.eraseColor(color);
+	    return getFontBitmap(bitmap, text);
 	}
 	
 	private int convertDiptoPix(float dip) {

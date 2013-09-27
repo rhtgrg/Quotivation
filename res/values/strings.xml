@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Quotivation</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-	<color name="black">#dddddd</color>
+    <string name="action_place_widget">Place Widget</string>
+    <string name="place_widget_title">Placing Widgets</string>
+    <string name="place_widget_message">To place a widget, go to the home screen and press on an empty space until the menu pops up.\n\nOn some devices, you will find a widgets tab in the application list.</string>
+    <string name="font_choices_label">Customize Appearance</string>
+    <string name="quote_source_label">My Quotes Come From&#8230;</string>
 </resources>

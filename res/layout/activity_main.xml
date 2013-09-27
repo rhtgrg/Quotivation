@@ -7,10 +7,47 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
-  <ImageView
-    android:id="@+id/quote_test"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:contentDescription="Nothing">
-  </ImageView>
+    <TextView
+        style="@style/ApplicationComponent"
+        android:id="@+id/font_choice_label"
+	    android:text="@string/font_choices_label">
+    </TextView>
+	<Spinner
+        style="@style/ApplicationComponent.Form"
+	    android:id="@+id/font_choice_spinner"
+	    android:prompt="@string/font_choices_label"
+	    android:entries="@array/font_choices"
+	    android:layout_below="@id/font_choice_label">
+	</Spinner>
+	<LinearLayout
+	    android:id="@+id/appearance_controls"
+	    android:layout_below="@id/font_choice_spinner"
+	    android:layout_height="110dp"
+	    android:layout_width="fill_parent">
+	    <LinearLayout
+	        style="@style/PercentWidthComponent"
+	        android:layout_weight=".33"
+	        android:orientation="vertical">
+	    </LinearLayout>
+	    <ImageView
+	        style="@style/PercentWidthComponent"
+	        android:id="@+id/font_preview"
+	        android:layout_weight=".66"
+	        android:layout_height="fill_parent">
+	    </ImageView>
+	</LinearLayout>
+	<!-- TODO: Add a font preview here -->
+    <TextView
+        style="@style/ApplicationComponent"
+        android:id="@+id/quote_source_label"
+	    android:text="@string/quote_source_label"
+	    android:layout_below="@id/appearance_controls">
+    </TextView>
+	<Spinner
+        style="@style/ApplicationComponent.Form"
+	    android:id="@+id/quote_source_spinner"
+	    android:prompt="@string/quote_source_label"
+	    android:entries="@array/quote_sources"
+	    android:layout_below="@id/quote_source_label">
+	</Spinner>
 </RelativeLayout>

@@ -30,9 +30,9 @@ public class QuotivationWidgetProvider extends AppWidgetProvider {
 		// TODO Auto-generated method stub
 		Log.w("HEY", "I was called");
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
-		BitmapManager bman = new BitmapManager(context);
+		BitmapManager bman = new BitmapManager(context, 250, 110);
 		RemoteViews views = new RemoteViews(context.getPackageName(),R.layout.quotivation_widget);
-		views.setImageViewBitmap(R.id.quote_text, bman.getFontBitmap("“This is some fancy quote by some fancy guy”"));
+		views.setImageViewBitmap(R.id.quote_text, bman.getTextOnTransparentBitmap("“This is some fancy quote by some fancy guy”"));
 		for(int appWidgetId : appWidgetIds){
 			appWidgetManager.updateAppWidget(appWidgetId, views);
 		}
