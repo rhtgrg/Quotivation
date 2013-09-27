@@ -6,8 +6,8 @@
   android:padding="@dimen/widget_margin">
   <ImageView
     android:id="@+id/quote_text"
-    android:layout_width="fill_parent"
-    android:layout_height="110dp"
+    android:layout_width="@dimen/widget_width"
+    android:layout_height="@dimen/widget_height"
     android:background="#000000">
   </ImageView>
 </FrameLayout>

@@ -25,7 +25,7 @@ public class BitmapManager {
 	int widgetWidth;
 	int color = Color.WHITE;
 	
-	public BitmapManager(Context context, int width, int height){
+	public BitmapManager(Context context, float width, float height){
 		// Set default paint settings
 		this.context = context;
 		initializePaint(Color.WHITE);
@@ -42,7 +42,10 @@ public class BitmapManager {
 	}
 	
 	// This is a hack because remote views are weird
-	private Bitmap getFontBitmap(Bitmap bitmap, String text) {
+	private Bitmap getFontBitmap(Bitmap sourceBitmap, String text) {
+		// Created a scaled bitmap seems to make it a bit sharper
+		//Bitmap bitmap = Bitmap.createScaledBitmap(sourceBitmap, widgetWidth, widgetHeight, true);
+		Bitmap bitmap = sourceBitmap;
 	    Canvas canvas = new Canvas(bitmap);
 	    // Get an array of lines from the given text
 	    ArrayList<String> lines = wrapText(text);
