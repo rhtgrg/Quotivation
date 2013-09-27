@@ -15,14 +15,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 
+/*
+ * This is the activity associated with the main application
+ * 
+ * @author rgarg
+ */
 public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ImageView v = (ImageView) findViewById(R.id.quote_test);
-		v.setImageBitmap(BitmapManager.getFontBitmap(getBaseContext(), "This is some fancy quote by some fancy guy", Color.GREEN,10));
     }
 
 

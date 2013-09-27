@@ -5,6 +5,11 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 
+/*
+ * This class manages the configuration of individual widgets
+ * 
+ * @author rgarg
+ */
 public class WidgetConfigure extends Activity {
 	int mAppWidgetId = -1;
 	
