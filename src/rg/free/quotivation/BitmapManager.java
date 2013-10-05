@@ -25,23 +25,47 @@ public class BitmapManager {
 	int widgetWidth;
 	int color = Color.WHITE;
 	
+	/*
+	 * Constructor method
+	 */
 	public BitmapManager(Context context, float width, float height){
 		// Set default paint settings
 		this.context = context;
-		initializePaint(Color.WHITE);
+		initializePaint();
 		widgetWidth = convertDiptoPix((float)width);
 		widgetHeight = convertDiptoPix((float)height);
 	}
 	
-	public void initializePaint(int color){
+	/*
+	 * Utility method to initialize paint on the first run
+	 */
+	protected void initializePaint(){
 	    paint = new Paint();
-	    Typeface typeface = Typeface.createFromAsset(context.getAssets(), "Aver Italic.ttf");
 	    paint.setAntiAlias(true);
-	    paint.setTypeface(typeface);
-	    paint.setColor(color);	
+	    setTextColor(Color.WHITE);
+	    setTextFont("Aver Italic");
 	}
 	
-	// This is a hack because remote views are weird
+	/*
+	 * Public method to set the color of the text in the generated bitmap
+	 */
+	public void setTextColor(int color){
+	    paint.setColor(color);	
+	}
+
+	/*
+	 * Public method to set the font of the text in the generated bitmap
+	 */
+	public void setTextFont(String fontName){
+		Log.d("QUOT", "Font is set to " + fontName);
+	    Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontName+".ttf");
+	    paint.setTypeface(typeface);		
+	}
+	
+	/*
+	 * This method creates a bitmap onto which the given text is rendered -
+	 * somewhat hacky, because RemoteViews don't like custom fonts
+	 */
 	private Bitmap getFontBitmap(Bitmap sourceBitmap, String text) {
 		// Created a scaled bitmap seems to make it a bit sharper
 		//Bitmap bitmap = Bitmap.createScaledBitmap(sourceBitmap, widgetWidth, widgetHeight, true);
@@ -57,17 +81,17 @@ public class BitmapManager {
 	    return bitmap;
 	}
 	
-	public Bitmap getTextOnTransparentBitmap(String text){
+	/*
+	 * Public method to get text rendered onto a bitmap, given a string
+	 */
+	public Bitmap getRenderedText(String text){
 	    Bitmap bitmap = Bitmap.createBitmap(widgetWidth, widgetHeight, Bitmap.Config.ARGB_4444);
 	    return getFontBitmap(bitmap, text);
 	}
 	
-	public Bitmap getTextOnColoredBitmap(String text, int color){
-	    Bitmap bitmap = Bitmap.createBitmap(widgetWidth, widgetHeight, Bitmap.Config.ARGB_4444);
-	    bitmap.eraseColor(color);
-	    return getFontBitmap(bitmap, text);
-	}
-	
+	/*
+	 * This method converts dips to pixels
+	 */
 	private int convertDiptoPix(float dp) {
 	    DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
 	    int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));       

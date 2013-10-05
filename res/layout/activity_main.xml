@@ -22,17 +22,36 @@
 	<LinearLayout
 	    android:id="@+id/appearance_controls"
 	    android:layout_below="@id/font_choice_spinner"
-	    android:layout_height="110dp"
-	    android:layout_width="fill_parent">
+	    style="@style/ApplicationComponent.Form"
+	    android:layout_height="50dp">
 	    <LinearLayout
 	        style="@style/PercentWidthComponent"
-	        android:layout_weight=".33"
+	        android:layout_weight=".25"
 	        android:orientation="vertical">
+	        <net.margaritov.preference.colorpicker.ColorPickerPanelView
+	            android:id="@+id/foreground_color_panel"
+	            android:padding="5dp"
+	            android:layout_marginRight="5dp"
+	            android:layout_width="fill_parent"
+	            android:layout_height="50dp"/>
+	    </LinearLayout>
+	    <LinearLayout
+	        style="@style/PercentWidthComponent"
+	        android:layout_weight=".25"
+	        android:orientation="vertical">
+	        <net.margaritov.preference.colorpicker.ColorPickerPanelView
+	            android:id="@+id/background_color_panel"
+	            android:padding="5dp"
+	            android:layout_marginRight="5dp"
+	            android:background="@color/color_picker_background"
+	            android:layout_width="fill_parent"
+	            android:layout_height="50dp"/>
 	    </LinearLayout>
 	    <ImageView
 	        style="@style/PercentWidthComponent"
 	        android:id="@+id/font_preview"
-	        android:layout_weight=".66"
+	        android:background="#cccccc"
+	        android:layout_weight=".50"
 	        android:layout_height="fill_parent">
 	    </ImageView>
 	</LinearLayout>
