@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".QuotivationAppActivity" >
     <TextView
         style="@style/ApplicationComponent"
         android:id="@+id/font_choice_label"
@@ -32,6 +32,7 @@
 	            android:id="@+id/foreground_color_panel"
 	            android:padding="5dp"
 	            android:layout_marginRight="5dp"
+	            android:background="@color/color_picker_background"
 	            android:layout_width="fill_parent"
 	            android:layout_height="50dp"/>
 	    </LinearLayout>
@@ -55,7 +56,6 @@
 	        android:layout_height="fill_parent">
 	    </ImageView>
 	</LinearLayout>
-	<!-- TODO: Add a font preview here -->
     <TextView
         style="@style/ApplicationComponent"
         android:id="@+id/quote_source_label"
@@ -69,4 +69,40 @@
 	    android:entries="@array/quote_sources"
 	    android:layout_below="@id/quote_source_label">
 	</Spinner>
+	<!-- Container for the custom text field -->
+	<LinearLayout
+	    style="@style/ApplicationComponent"
+	    android:id="@+id/config_text_container"
+	    android:orientation="vertical"
+	    android:layout_below="@id/quote_source_spinner"
+		android:visibility="gone">
+	    <TextView
+        	style="@style/ApplicationComponent"
+        	android:id="@+id/config_text_label"
+	    	android:text="@string/config_text_label">
+	    </TextView>
+		<EditText
+	        style="@style/ApplicationComponent.Form"
+		    android:id="@+id/config_text_input"
+		    android:inputType="textMultiLine"
+		    android:lines="5">
+		</EditText>
+	</LinearLayout>
+	<!-- Container for the RSS URL field -->
+	<LinearLayout
+	    style="@style/ApplicationComponent"
+	    android:id="@+id/config_rss_container"
+	    android:orientation="vertical"
+	    android:layout_below="@id/quote_source_spinner"
+	    android:visibility="gone">
+	    <TextView
+        	style="@style/ApplicationComponent"
+        	android:id="@+id/config_rss_label"
+	    	android:text="@string/config_rss_label">
+	    </TextView>
+		<EditText
+	        style="@style/ApplicationComponent.Form"
+		    android:id="@+id/config_rss_input">
+		</EditText>
+	</LinearLayout>
 </RelativeLayout>

@@ -8,6 +8,6 @@
     android:id="@+id/quote_text"
     android:layout_width="@dimen/widget_width"
     android:layout_height="@dimen/widget_height"
-    android:background="#000000">
+    android:background="@drawable/rounded_corners">
   </ImageView>
 </FrameLayout>

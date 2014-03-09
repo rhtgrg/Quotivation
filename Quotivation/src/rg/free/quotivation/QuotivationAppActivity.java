@@ -1,6 +1,7 @@
 package rg.free.quotivation;
 
 import net.margaritov.preference.colorpicker.ColorPickerDialog;
+import net.margaritov.preference.colorpicker.ColorPickerPanelView;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
@@ -32,7 +33,7 @@ import android.widget.Spinner;
  * 
  * @author rgarg
  */
-public class MainActivity extends Activity {
+public class QuotivationAppActivity extends Activity {
 	// Maintain a reference to the shared preferences
 	SharedPreferences prefs;
 	// Maintain a reference to the bitmap manager
@@ -95,27 +96,12 @@ public class MainActivity extends Activity {
      * Method to activate form listeners
      */
     protected void activateFormListeners(){
-		// Create the color picker dialog
-		final ColorPickerDialog cpDialog = new ColorPickerDialog(this, Color.WHITE){			
-			@Override
-			public void onColorChanged(int color) {
-				super.onColorChanged(color);
-				// Save it as a preference
-				SharedPreferences.Editor prefsEditor = prefs.edit();
-				prefsEditor.putInt("foreground_color", color);
-				// Update the font preview with the given color
-				fontPreviewBitmap.setTextColor(color);
-				// Redraw the preview
-				updateFontPreview();
-				// Commit the preference
-				prefsEditor.commit();
-			}
-		};
-		// We want to be able to control alpha
-		cpDialog.setAlphaSliderVisible(true);
-		
     	// Set up the listener for the font choice
     	Spinner fontSpinner = (Spinner) findViewById(R.id.font_choice_spinner);
+    	
+    	// Set the default font choice to be Aver Italic
+    	fontSpinner.setSelection(1);
+    	// Set up the
     	fontSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -139,13 +125,51 @@ public class MainActivity extends Activity {
 		});
     	
     	// Set up listener for the foreground color panel
-    	findViewById(R.id.foreground_color_panel).setOnClickListener(new OnClickListener(){
+    	activateColorSwatch((ColorPickerPanelView) findViewById(R.id.foreground_color_panel), "foreground_color", 0xAAAAAA, false);
+    	
+    	// Set up listener for the background color panel
+    	activateColorSwatch((ColorPickerPanelView) findViewById(R.id.background_color_panel), "background_color", 0xffffff, true);
+    }
+    
+    /*
+     * This method is for activating the color swatches in the form
+     */
+    protected void activateColorSwatch(final ColorPickerPanelView view, final String prefName, int defaultColor, final Boolean background){
+    	// Get a handle for the font preview image view
+    	final ImageView iv = (ImageView) findViewById(R.id.font_preview);
+    	// Create the color dialog
+		final ColorPickerDialog colorDialog = new ColorPickerDialog(this, defaultColor){			
+			@Override
+			public void onColorChanged(int color) {
+				super.onColorChanged(color);
+				// Save it as a preference
+				SharedPreferences.Editor prefsEditor = prefs.edit();
+				prefsEditor.putInt(prefName, color);
+				if(background){
+					// Update the font preview with the given color
+					iv.setBackgroundColor(color);
+				} else {
+					// Update the font preview with the given font
+					fontPreviewBitmap.setTextColor(color);
+					// Redraw the preview
+					updateFontPreview();
+				}
+				// Set the color of the swatch
+				view.setColor(color);
+				// Commit the preference
+				prefsEditor.commit();
+			}
+		};
+		// We want to be able to control alpha
+		colorDialog.setAlphaSliderVisible(true);   	
+    	// Set up listener for this swatch
+    	view.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				// Show the color picker dialog
-				cpDialog.show();
+				colorDialog.show();
 			}
-    	});
+    	});    	
     }
     
     /*
@@ -164,6 +188,7 @@ public class MainActivity extends Activity {
      */
     @Override
     protected void onPause(){
+    	super.onPause();
     	Intent intent = new Intent(this,QuotivationWidgetProvider.class);
     	intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
     	int ids[] = AppWidgetManager.getInstance(getApplication())

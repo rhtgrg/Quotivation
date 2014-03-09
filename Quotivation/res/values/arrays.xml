@@ -8,7 +8,6 @@
     
     <!-- List of quote sources users can choose from -->
     <string-array name="quote_sources">
-		<item>The Default Source</item>
         <item>Text I\'ve Manually Entered</item>
         <item>An RSS Feed From The Internet</item>
     </string-array>
